@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container py-5">
+  <h2 class="mb-4">My Wishlist</h2>
+  <div class="row">
+    {% for item in wishlist_items %}
+    <div class="col-md-4 mb-4">
+      <div class="card h-100 shadow">
+        <img src="{{ item.pet.image.url }}" class="card-img-top" alt="{{ item.pet.name }}">
+        <div class="card-body">
+          <h5 class="card-title">{{ item.pet.name }}</h5>
+          <p class="card-text">{{ item.pet.breed }}</p>
+          <a href="{% url 'adoption:adoption_request' item.pet.id %}" class="btn btn-success mb-2">Apply for Adoption</a>
+          <a href="{% url 'adoption:pet_detail' item.pet.id %}" class="btn btn-info mb-2">View Details</a>
+          <a href="{% url 'adoption:toggle_wishlist' item.pet.id %}" class="btn btn-outline-danger float-right">
+            <i class="fa fa-trash"></i> Remove
+          </a>
+        </div>
+      </div>
+    </div>
+    {% empty %}
+    <p>No pets in your wishlist.</p>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

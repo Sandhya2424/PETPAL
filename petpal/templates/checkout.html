@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5 w-50">
+    <h2 class="text-center mb-4">Checkout - {{ appointment.service }}</h2>
+
+    <p class="text-center fw-bold">Amount: ₹{{ appointment.amount}}/-</p>
+
+    <form method="POST">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="payment_method" class="form-label">Select Payment Method</label>
+            <select name="payment_method" class="form-select" id="payment_method">
+                <option value="online">Online Payment</option>
+                <option value="cod">Cash on Delivery (COD)</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100">Proceed to Pay</button>
+    </form>
+</div>
+{% endblock %}

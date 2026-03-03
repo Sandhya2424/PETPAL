@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container mt-5 p-5 text-center w-50">
+
+{% if payment %}
+<form action="{% url 'groomingpet:payment_success' user.username %}" method="POST">
+
+<script
+    src="https://checkout.razorpay.com/v1/checkout.js"
+    data-key="rzp_test_RrnpiKmyBDnWOF"
+    data-amount="{{ payment.amount }}"
+    data-currency="INR"
+    data-order_id="{{ payment.id }}"
+    data-buttontext="Pay with Razorpay"
+    data-name="PetPal Grooming"
+    data-description="Pet Grooming Services"
+    data-prefill.name="{{ user.username }}"
+    data-prefill.email="test@example.com"
+    data-theme.color="#F37254">
+</script>
+
+<input type="hidden" name="hidden"/>
+
+</form>
+
+{% else %}
+<h3 class="text-success">Booking Confirmed via COD</h3>
+<a href="{% url 'groomingpet:services' %}" class="btn btn-primary mt-3">
+    Back to Services
+</a>
+{% endif %}
+
+</div>
+
+{% endblock %}

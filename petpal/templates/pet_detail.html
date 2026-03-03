@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container py-5">
+  <div class="row">
+    <div class="col-md-6">
+      <img src="{{ pet.image.url }}" class="img-fluid shadow" alt="{{ pet.name }}">
+    </div>
+    <div class="col-md-6">
+      <h2>{{ pet.name }}</h2>
+      <p><b>Breed:</b> {{ pet.breed }}</p>
+      <p><b>Age:</b> {{ pet.age }}</p>
+      <p><b>Description:</b> {{ pet.description }}</p>
+      <a href="{% url 'adoption:adoption_request' pet.id %}" class="btn btn-success mb-2">Apply for Adoption</a>
+      <a href="{% url 'adoption:toggle_wishlist' pet.id %}" class="btn btn-outline-danger">
+        {% if in_wishlist %}<i class="fa fa-heart"></i> Remove{% else %}<i class="fa fa-heart-o"></i> Add{% endif %}
+      </a>
+    </div>
+  </div>
+</div>
+{% endblock %}

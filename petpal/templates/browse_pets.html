@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container py-5">
+  <h2 class="mb-4">Browse Pets</h2>
+
+  <!-- Search Bar -->
+  <form method="GET" class="mb-4">
+    <div class="input-group">
+      <input type="text" name="q" class="form-control" placeholder="Search pets by name or breed" value="{{ query }}">
+      <div class="input-group-append">
+        <button class="btn btn-primary" type="submit"><i class="fa fa-search"></i></button>
+      </div>
+    </div>
+  </form>
+
+  <div class="row">
+    {% for pet in pets %}
+    <div class="col-md-4 mb-4">
+      <div class="card h-100 shadow">
+        <img src="{{ pet.image.url }}" class="card-img-top" alt="{{ pet.name }}">
+        <div class="card-body">
+          <h5 class="card-title">{{ pet.name }}</h5>
+          <p class="card-text">{{ pet.breed }}</p>
+          <a href="{% url 'adoption:adoption_request' pet.id %}" class="btn btn-success mb-2">Apply for Adoption</a>
+          <a href="{% url 'adoption:pet_detail' pet.id %}" class="btn btn-info mb-2">View Details</a>
+          <a href="{% url 'adoption:toggle_wishlist' pet.id %}" class="btn btn-outline-danger float-right">
+            {% if pet.id in favorite_pets %}<i class="fa fa-heart"></i>{% else %}<i class="fa fa-heart-o"></i>{% endif %}
+          </a>
+        </div>
+      </div>
+    </div>
+    {% empty %}
+    <p>No pets found.</p>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

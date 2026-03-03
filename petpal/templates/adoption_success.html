@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container py-5 text-center">
+  <h2 class="mb-4 text-success">Your adoption request has been submitted successfully!</h2>
+  <a href="{% url 'adoption:browse_pets' %}" class="btn btn-primary">Back to Browse Pets</a>
+</div>
+{% endblock %}

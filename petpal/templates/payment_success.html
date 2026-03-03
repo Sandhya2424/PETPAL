@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5 text-center">
+    <h2 class="text-success">Payment Successful!</h2>
+    <p>Your grooming appointment has been confirmed.</p>
+    <a href="{% url 'groomingpet:services' %}" class="btn btn-primary mt-3">Back to Services</a>
+</div>
+{% endblock %}

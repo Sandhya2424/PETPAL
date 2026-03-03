@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2 class="mt-4 text-center">All Bookings</h2>
+<div class="container mt-4" style="max-width: 1000px;">
+    <table class="table table-bordered">
+        <thead style="background-color: black; color: white;">
+            <tr>
+                <th>Adopter</th>
+                <th>Service</th>
+                <th>Pet Name</th>
+                <th>Date</th>
+                <th>Time Slot</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for booking in bookings %}
+            <tr>
+                <td>{{ booking.adopter.username }}</td>
+                <td>{{ booking.service }}</td>
+                <td>{{ booking.pet_name }}</td>
+                <td>{{ booking.date }}</td>
+                <td>{{ booking.time_slot }}</td>
+                <td>
+                    {% if booking.is_paid %}
+                        <span class="text-success">Booking Confirmed</span>
+                    {% else %}
+                        <span class="text-warning">Pending</span>
+                    {% endif %}
+                </td>
+            </tr>
+        {% empty %}
+            <tr><td colspan="6" class="text-center">No bookings yet.</td></tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
